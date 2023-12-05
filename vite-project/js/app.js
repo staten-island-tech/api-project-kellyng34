@@ -1,10 +1,10 @@
 
-const URL= `https://recipal.com/api/`;
+const URL= `https://api.spoonacular.com/recipes/complexSearch?query=cuisine&apiKey=ddc432ea9f6b4256ac7ec8f75ae3b67f`;
 // async goes before any function that grabs api
 async function getData(URL){
     try{
         //requesting a response REST API's
-        const response = await fetch(URL);
+        const response = await fetch(URL,{});
         if(response.stauts !=200){
             throw new Error(response.statusText);
         }
@@ -13,7 +13,7 @@ async function getData(URL){
         document.querySelector("h1").textContent = data.Content;
         //displays if there is error
     } catch (error){
-        conslone.log(error, "uh on");
+        console.log(error, "uh on");
         document.querySelector("h1").textContent = "uh oh"
     }
 }
