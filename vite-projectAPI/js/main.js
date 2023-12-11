@@ -3,22 +3,38 @@ import javascriptLogo from '../public/javascript.svg'
 import viteLogo from '../public/vite.svg'
 import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const URL= `https://api.spoonacular.com/recipes/random`;
+const key= 'ddc432ea9f6b4256ac7ec8f75ae3b67f';
+// async goes before any function that grabs api
+async function getData(URL){
+    try{
+        //requesting a response REST API's
+        const response = await fetch(URL + "?" + new URLSearchParams({
+            apiKey: key,
+            number: 40
+    
+        }));
+        if(response.status !=200){
+            throw new Error(response.statusText);
+        }
+        //convert reponse to json
+        const data= await response.json();
+        console.log(data);
+        //displays if there is error
+    } catch (error){
+        console.log(error);
+        document.querySelector("h1").textContent = "uh oh";
+    }
+}
+getData(URL);
 
-setupCounter(document.querySelector('#counter'))
+function insert(arr){
+    arr.forEach((data) => {
+DOMSelectors.container_2.insertAdjacentHTML(
+    "afterbegin",
+    `<div class= "card">
+    <h2 class= "title">${data.title}</h2>
+    <img scr="${data.image}" class="cardimg">
+    <h3 class= "readyInMinutes" id= >${data.readyInMinutes}</h3>
+    </div>`
+    )})};

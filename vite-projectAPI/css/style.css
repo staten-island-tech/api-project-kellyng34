@@ -1,0 +1,14 @@
+.title{
+    font-size: 8rem;
+    background-color: pink;
+    margin: 2rem auto;
+    text-align: center;
+    width: 50rem;
+    -webkit-backdrop-filter: blur(25px) saturate(10%);
+    border-radius: 30px;
+    transition: all 0.3s;
+    border-radius: 10px;
+    font-style: italic;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
+}

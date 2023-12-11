@@ -14,7 +14,7 @@ async function getData(URL){
         }
         //convert reponse to json
         const data= await response.json();
-        console.log (data);
+        console.log(data);
         //displays if there is error
     } catch (error){
         console.log(error);
@@ -22,3 +22,14 @@ async function getData(URL){
     }
 }
 getData(URL);
+
+function insert(arr){
+    arr.forEach((data) => {
+DOMSelectors.container_2.insertAdjacentHTML(
+    "afterbegin",
+    `<div class= "card">
+    <h2 class= "title">${data.title}</h2>
+    <img scr="${data.image}" class="cardimg">
+    <h3 class= "readyInMinutes" id= >${data.readyInMinutes}</h3>
+    </div>`
+    )})};
