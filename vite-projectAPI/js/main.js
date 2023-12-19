@@ -6,7 +6,8 @@ import { setupCounter } from './counter.js'
 const URL = `https://api.spoonacular.com/recipes/random`;
 const key = 'ddc432ea9f6b4256ac7ec8f75ae3b67f';
 
-list = {}
+let data = []
+//push the data into the data array
 // async goes before any function that grabs api
 async function getData(URL) {
     try {
@@ -20,10 +21,12 @@ async function getData(URL) {
             throw new Error(response.statusText);
         }
         //convert reponse to json
-        const data = await response.json();
-        console.log(data);
-        url.push(data);
-        //displays if there is error
+        const info = await response.json();
+        console.log(info);
+
+        data.recipes.forEach((recipes) => data.push(recipes));
+
+
     } catch (error) {
         console.log(error);
         document.querySelector("h1").textContent = "uh oh";
@@ -31,20 +34,19 @@ async function getData(URL) {
 }
 getData(URL);
 
-
-function insert(url) {
-    url.forEach((data) => {
+function insert(data) {
+    data.forEach((x) => {
         DOMSelectors.container_2.insertAdjacentHTML(
-            "afterbegin",
+            "beforebegin",
             `<div class= "card">
-    <h2 class= "title">${data.title}</h2>
-    <img scr="${data.image}" class="cardimg">
-    <h3 class=" cuisines" >${"cuisines" + data.cuisines}</h3>
-    <h3 class= "readyInMinutes" >${"Minutes" + data.readyInMinutes}</h3>
+    <h2 class= "title">${x.title}</h2>
+    <img scr="${x.image}" class="cardimg">
+    <h3 class=" cuisines" >${"Cuisines" + x.cuisines}</h3>
+    <h3 class= "readyInMinutes" >${"Minutes" + x.readyInMinutes}</h3>
     </div>`
         )
     })
 };
 
-insert(url);
+insert(data);
 
