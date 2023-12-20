@@ -1,14 +1,43 @@
-.title{
-    font-size: 8rem;
-    background-color: pink;
+.card{
+    font-size: 20px;
+    background-color: rgb(212, 231, 240);
+    margin: 2rem auto;
+    text-align: center;
+    width: 40rem;
+    -webkit-backdrop-filter: blur(25px) saturate(10%);
+    border-radius: 30px;
+    transition: all 0.3s;
+    border-radius: 5px;
+    font-style: italic;
+    flex-direction: column;
+    flex-wrap: wrap;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  
+}
+
+.heading {
+    font-size: 40px;
+    background-color: rgb(139, 166, 196);
     margin: 2rem auto;
     text-align: center;
     width: 50rem;
     -webkit-backdrop-filter: blur(25px) saturate(10%);
     border-radius: 30px;
     transition: all 0.3s;
-    border-radius: 10px;
+    border-radius: 5px;
     font-style: italic;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   
+  }
+.container{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+}
+
+.cardimg{
+    width: 300px;
+    height: 200px;
 }

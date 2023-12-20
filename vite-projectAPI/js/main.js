@@ -1,4 +1,5 @@
 import '../css/style.css'
+import DOMSelectors from './dom'
 import javascriptLogo from '../public/javascript.svg'
 import viteLogo from '../public/vite.svg'
 import { setupCounter } from './counter.js'
@@ -24,7 +25,7 @@ async function getData(URL) {
         const info = await response.json();
         console.log(info);
 
-        data.recipes.forEach((recipes) => data.push(recipes));
+        info.recipes.forEach((recipes) => data.push(recipes));
 
 
     } catch (error) {
@@ -32,21 +33,25 @@ async function getData(URL) {
         document.querySelector("h1").textContent = "uh oh";
     }
 }
-getData(URL);
+getData(URL).then(()=>{
+    insert(data);
+})
+
+
 
 function insert(data) {
+    console.log(data)
     data.forEach((x) => {
-        DOMSelectors.container_2.insertAdjacentHTML(
+        DOMSelectors.container.insertAdjacentHTML(
             "beforebegin",
             `<div class= "card">
     <h2 class= "title">${x.title}</h2>
-    <img scr="${x.image}" class="cardimg">
-    <h3 class=" cuisines" >${"Cuisines" + x.cuisines}</h3>
-    <h3 class= "readyInMinutes" >${"Minutes" + x.readyInMinutes}</h3>
+    <img src="${x.image}" class="cardimg">
+    <h3 class=" cuisines" >${x.cuisines}</h3>
+    <h3 class= "readyInMinutes" >${"Time to prepare: " + x.readyInMinutes + " minutes"}</h3>
     </div>`
         )
     })
 };
 
-insert(data);
 
