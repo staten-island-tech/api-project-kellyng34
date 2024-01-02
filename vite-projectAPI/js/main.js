@@ -53,33 +53,20 @@ function insert(data) {
         )
     })
 };
-
+ 
+ 
 function clearfield(){
     DOMSelectors.container.innerHTML="";
 }
 
-DOMSelectors.form.addEventListener("click", function(event){
+let container = document.querySelectorAll("#card")
+
+data.forEach(container) > data.addEventListener("click",function(){
+
     clearfield()
-    const URL_2= `https://api.spoonacular.com/recipes/{id}/tasteWidget.json`;
-    let id= 
-})
+    const URL_2= `https://api.spoonacular.com/recipes/${id}/tasteWidget.json`;
+    data.forEach((recipe)=>{
+        let id= event.target.id
+    })
+});
 
-async function getData(tasteWidget) {
-    try {
-        //requesting a response REST API's
-        const response = await fetch(URL + "?" + new URLSearchParams({
-            apiKey: key,
-
-        }));
-        if (response.status != 200) {
-            throw new Error(response.statusText);
-        }
-        //convert reponse to json
-        const info = await response.json();
-
-
-    } catch (error) {
-        console.log(error);
-        document.querySelector("h1").textContent = "uh oh";
-    }
-}
