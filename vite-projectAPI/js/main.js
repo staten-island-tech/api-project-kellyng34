@@ -5,7 +5,7 @@ import viteLogo from '../public/vite.svg'
 import { setupCounter } from './counter.js'
 
 const URL = `https://api.spoonacular.com/recipes/random`;
-const key = 'ddc432ea9f6b4256ac7ec8f75ae3b67f';
+const key = '24db390198bc4dd0865a2e9ddb27071c';
 async function init(){
     let data = []
     function insert(data) {
@@ -13,11 +13,12 @@ async function init(){
         data.forEach((x) => {
             DOMSelectors.container.insertAdjacentHTML(
                 "afterbegin",
-                `<div class= "card">
+                `<div class= "card" id="${x.id}">
         <h2 class= "title">${x.title}</h2>
         <img src="${x.image}" class="cardimg">
         <h3 class=" cuisines" >${x.cuisines}</h3>
         <h3 class= "readyInMinutes" >${"Time to prepare: " + x.readyInMinutes + " minutes"}</h3>
+        <button class="learn">Learn More</button>
         </div>`
             )
         })
@@ -51,44 +52,50 @@ async function init(){
         insert(data);
     })
     
-    // const URL_2= `https://api.spoonacular.com/recipes/${id}/tasteWidget.json`
-    // async function getData(URL_2) {
-    //     try {
-    //         //requesting a response REST API's
-    //         const response = await fetch(URL_2 + "?" + new URLSearchParams({
-    //             apiKey: key,
-    //             number: 39
+   
+    async function getData2(search, card) {
+        const URL_2= `https://api.spoonacular.com/recipes/${search}/tasteWidget.json`
+        try {
+            //requesting a response REST API's
+            const response = await fetch(URL_2 + "?" + new URLSearchParams({
+                apiKey: key,
+                number: 39
     
-    //         }));
-    //         if (response.status != 200) {
-    //             throw new Error(response.statusText);
-    //         }
-    //         //convert reponse to json
-    //         const info = await response.json();
-    //         console.log(info);
-    
-    //     } catch (error) {
-    //         console.log(error);
-    //         document.querySelector("h1").textContent = "uh oh";
-    //     }}
-    
+            }));
+            if (response.status != 200) {
+                throw new Error(response.statusText);
+            }
+            //convert reponse to json
+            const info = await response.json();
+            console.log(info);
+            //insert info to card
+            card.innerHTML = 
+                `<h3 class="sweetness" >${data.sweetness}</h3>
+                <h3 class="saltiness" ></h3>
+                <h3 class="bitterness" ></h3>
+                <h3 class="savoriness" ></h3>
+                <h3 class="spiciness" ></h3>
+                
+                `
+            
+        } catch (error) {
+            console.log(error);
+            document.querySelector("h1").textContent = "uh oh";
+        }}
+     
 
-    let all = document.querySelectorAll(".card")
+    let all = document.querySelectorAll(".learn")
 
-    function clear(card){
-       card.innerHTML="";
-        card.insertAdjacentHTML( 
-            "afterbegin", 
-            `<h3 class="sweetness" ></h3>
-            <h3 class="saltiness" ></h3>
-            <h3 class="bitterness" ></h3>
-            <h3 class="savoriness" ></h3>
-            <h3 class="spiciness" ></h3>`
-            )
-    }
+   
+   
     
-    all.forEach((card) => card.addEventListener("click",function(event){
-        clear(card)
+    all.forEach((card) => card.addEventListener("click", function(event){
+      let search = event.target.parentElement.id
+    
+        //make new API call with id
+        getData2(search, card)
+      
+        
     }))
 
 }

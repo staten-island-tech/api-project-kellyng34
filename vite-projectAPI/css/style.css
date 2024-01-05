@@ -9,7 +9,7 @@
     border-radius: 30px;
     transition: all 0.3s;
     border-radius: 5px;
-    font-style: italic;
+    font-style: italic; 
     flex-direction: row;
     flex-wrap: wrap;
     transition: all 0.3s;
