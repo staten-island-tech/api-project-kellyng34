@@ -15,8 +15,8 @@ async function init(){
                 "afterbegin",
                 `<div class= "card" id="${x.id}">
         <h2 class= "title">${x.title}</h2>
-        <img src="${x.image}" class="cardimg">
-        <h3 class=" cuisines" >${x.cuisines}</h3>
+        <img src="${x.image}" alt= "pic of"class="cardimg">
+        <h3 class=" servings" >${x.servings + " servings"}</h3>
         <h3 class= "readyInMinutes" >${"Time to prepare: " + x.readyInMinutes + " minutes"}</h3>
         <button class="learn">Learn More</button>
         </div>`
@@ -70,12 +70,15 @@ async function init(){
             console.log(info);
             //insert info to card
             card.innerHTML = 
-                `<h3 class="sweetness" >${data.sweetness}</h3>
-                <h3 class="saltiness" ></h3>
-                <h3 class="bitterness" ></h3>
-                <h3 class="savoriness" ></h3>
-                <h3 class="spiciness" ></h3>
-                
+
+
+                `
+                <h1> Taste </h1>
+                <h3 class="sweetness" > ${info.sweetness + " sweetness level"}</h3>
+                <h3 class="saltiness" > ${info.saltiness + " saltiness level"}</h3>
+                <h3 class="bitterness" > ${info.bitterness + " bitterness level"}</h3>
+                <h3 class="savoriness" > ${info.savoriness + " savoriness level"}</h3>
+                <h3 class="spiciness" > ${info.spiciness + " spiciness level"}</h3>
                 `
             
         } catch (error) {
@@ -91,9 +94,9 @@ async function init(){
     
     all.forEach((card) => card.addEventListener("click", function(event){
       let search = event.target.parentElement.id
-    
+        let parent = event.target.parentElement
         //make new API call with id
-        getData2(search, card)
+        getData2(search, parent)
       
         
     }))

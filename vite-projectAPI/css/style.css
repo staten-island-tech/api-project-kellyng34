@@ -49,3 +49,12 @@
     height: 200px;
     align-items: center;
 }
+
+.learn{
+    width: 130px;
+    height: 35px;
+    transition: all 0.3s;
+    font-size: 0.8rem;
+    border-radius: 12px;
+    background-color:white;
+}
