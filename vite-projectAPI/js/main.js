@@ -15,7 +15,7 @@ async function init(){
                 "afterbegin",
                 `<div class= "card" id="${x.id}">
         <h2 class= "title">${x.title}</h2>
-        <img src="${x.image}" alt= "pic of"class="cardimg">
+        <img src="${x.image}" alt= "pic of ${x.title}"class="cardimg">
         <h3 class=" servings" >${x.servings + " servings"}</h3>
         <h3 class= "readyInMinutes" >${"Time to prepare: " + x.readyInMinutes + " minutes"}</h3>
         <button class="learn">Learn More</button>
@@ -31,7 +31,6 @@ async function init(){
             const response = await fetch(URL + "?" + new URLSearchParams({
                 apiKey: key,
                 number: 39
-    
             }));
             if (response.status != 200) {
                 throw new Error(response.statusText);
@@ -41,8 +40,6 @@ async function init(){
             console.log(info);
     
             info.recipes.forEach((recipes) => data.push(recipes));
-    
-    
         } catch (error) {
             console.log(error);
             document.querySelector("h1").textContent = "uh oh";
@@ -51,8 +48,6 @@ async function init(){
     await getData(URL).then(()=>{
         insert(data);
     })
-    
-   
     async function getData2(search, card) {
         const URL_2= `https://api.spoonacular.com/recipes/${search}/tasteWidget.json`
         try {
@@ -60,7 +55,6 @@ async function init(){
             const response = await fetch(URL_2 + "?" + new URLSearchParams({
                 apiKey: key,
                 number: 39
-    
             }));
             if (response.status != 200) {
                 throw new Error(response.statusText);
@@ -70,37 +64,23 @@ async function init(){
             console.log(info);
             //insert info to card
             card.innerHTML = 
-
-
-                `
-                <h1> Taste </h1>
+                `<h1> Taste </h1>
                 <h3 class="sweetness" > ${info.sweetness + " sweetness level"}</h3>
                 <h3 class="saltiness" > ${info.saltiness + " saltiness level"}</h3>
                 <h3 class="bitterness" > ${info.bitterness + " bitterness level"}</h3>
                 <h3 class="savoriness" > ${info.savoriness + " savoriness level"}</h3>
-                <h3 class="spiciness" > ${info.spiciness + " spiciness level"}</h3>
-                `
-            
+                <h3 class="spiciness" > ${info.spiciness + " spiciness level"}</h3>`  
         } catch (error) {
             console.log(error);
             document.querySelector("h1").textContent = "uh oh";
         }}
-     
-
     let all = document.querySelectorAll(".learn")
 
-   
-   
-    
     all.forEach((card) => card.addEventListener("click", function(event){
       let search = event.target.parentElement.id
         let parent = event.target.parentElement
         //make new API call with id
         getData2(search, parent)
-      
-        
     }))
-
 }
-
 init();
